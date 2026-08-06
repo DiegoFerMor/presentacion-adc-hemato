@@ -1,0 +1,747 @@
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State of the Art in ADCs in Hematology | Hygeia Hub</title>
+    
+    <!-- Fonts: Manrope (Display) & Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons: Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "granate-clinico": "#7A1C24",
+                        "rosa-viejo": "#E8D7D9",
+                        "blanco-hueso": "#F9F6F6",
+                        "blanco-puro": "#FFFFFF",
+                        "oro-sanitario": "#D4AF37",
+                    },
+                    fontFamily: {
+                        headline: ["Manrope", "sans-serif"],
+                        body: ["Inter", "sans-serif"]
+                    },
+                    letterSpacing: {
+                        ultra: "-0.02em",
+                        stately: "0.2em"
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            -webkit-font-smoothing: antialiased; 
+            background-color: #F9F6F6; 
+            color: #7A1C24; 
+        }
+        h1, h2, h3, h4, h5 { font-family: 'Manrope', sans-serif; }
+        
+        /* Navbar con efecto cristal */
+        .glass-nav-light { 
+            background: rgba(249, 246, 246, 0.95); 
+            backdrop-filter: blur(16px); 
+            border-bottom: 1px solid rgba(122, 28, 36, 0.1);
+        }
+        
+        /* Reveal animation */
+        .reveal { transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; transform: translateY(20px); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        /* Custom Accordion transition */
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; }
+        .accordion-item.active .accordion-content { max-height: 1500px; } 
+        .accordion-item.active .accordion-icon { transform: rotate(180deg); }
+        
+        .text-balance { text-wrap: balance; }
+        
+        /* Color de selección de texto adaptado al tema */
+        ::selection { background-color: #D4AF37; color: #7A1C24; }
+    </style>
+</head>
+<body class="relative">
+
+    <nav class="fixed top-0 w-full z-50 glass-nav-light transition-all shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 h-24 lg:h-28 flex justify-between items-center transition-all">
+            <!-- Brand -->
+            <div class="flex items-center">
+                <img src="./logos/logo_adc.png" alt="State of the Art ADC" class="h-16 md:h-24 lg:h-28 py-2 w-auto transition-all" onerror="this.onerror=null; this.src='https://placehold.co/400x120/F9F6F6/7A1C24?text=State+of+the+Art+ADC'">
+            </div>
+            
+            <!-- Links -->
+            <div class="hidden lg:flex items-center gap-10">
+                <a href="#proposito" class="text-sm font-bold text-granate-clinico hover:text-oro-sanitario transition-colors uppercase tracking-widest text-[11px]">Justificación</a>
+                <a href="#objetivos" class="text-sm font-bold text-granate-clinico hover:text-oro-sanitario transition-colors uppercase tracking-widest text-[11px]">Objetivos</a>
+                <a href="#programa" class="text-sm font-bold text-granate-clinico hover:text-oro-sanitario transition-colors uppercase tracking-widest text-[11px]">Programa</a>
+                <a href="#avales" class="text-sm font-bold text-granate-clinico hover:text-oro-sanitario transition-colors uppercase tracking-widest text-[11px]">Docentes</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <header class="bg-granate-clinico relative min-h-screen flex items-center pt-32 overflow-hidden text-blanco-puro">
+            <!-- Elementos decorativos de fondo sutiles -->
+            <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
+                <div class="absolute -top-[20%] -right-[10%] w-[50vw] h-[50vw] rounded-full bg-oro-sanitario blur-[150px] opacity-30"></div>
+                <div class="absolute bottom-[10%] -left-[10%] w-[30vw] h-[30vw] rounded-full bg-rosa-viejo blur-[120px] opacity-10"></div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 relative z-10 w-full">
+                <div class="lg:col-span-8 space-y-10 reveal">
+                    <div class="inline-flex items-center gap-3 bg-blanco-puro/10 backdrop-blur-md shadow-sm px-4 py-2 rounded-full border border-blanco-puro/20 mb-4">
+                        <span class="w-1.5 h-1.5 rounded-full bg-oro-sanitario animate-pulse"></span>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-blanco-puro">Edición 2027 - 2028</span>
+                    </div>
+                    
+                    <h1 class="flex flex-col gap-2 md:gap-4">
+                        <span class="text-xl md:text-2xl lg:text-3xl font-medium text-blanco-puro/80 tracking-wide leading-snug max-w-4xl">
+                            State of the Art in ADCs in Hematology
+                        </span>
+                        <span class="text-5xl md:text-7xl lg:text-8xl font-black text-blanco-puro leading-[1.05] tracking-ultra text-balance mt-2">
+                            Secuenciación Óptima & <br>
+                            <span class="text-oro-sanitario italic font-medium">Manejo de Toxicidad</span>
+                        </span>
+                    </h1>
+                    
+                    <p class="text-lg md:text-2xl text-blanco-puro/90 max-w-2xl font-body leading-relaxed text-balance">
+                        Configuración del algoritmo terapéutico de precisión, estrategias de rescate y manejo proactivo de toxicidades exclusivas de clase.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                        <div class="flex items-start gap-4">
+                            <span class="material-symbols-outlined text-oro-sanitario">biotech</span>
+                            <span class="text-xs font-semibold leading-snug text-blanco-puro">Evidencia rigurosa (EHA / HemaSphere).</span>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <span class="material-symbols-outlined text-oro-sanitario">verified</span>
+                            <span class="text-xs font-semibold leading-snug text-blanco-puro">Créditos CFC del Sistema Nacional de Salud.</span>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <span class="material-symbols-outlined text-oro-sanitario">psychology</span>
+                            <span class="text-xs font-semibold leading-snug text-blanco-puro">Integración de PROs y prevención de burnout.</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Botones CTA -->
+                    <div class="flex flex-wrap gap-6 pt-6">
+                        <a href="./memoria_academica.pdf" target="_blank" class="bg-oro-sanitario text-granate-clinico px-8 py-4 rounded-md font-bold text-sm uppercase tracking-widest hover:bg-opacity-90 transition-all shadow-lg shadow-oro-sanitario/30 flex items-center gap-3">
+                            Descargar Memoria
+                            <span class="material-symbols-outlined text-sm">download</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Asymmetrical Typographic Block -->
+                <div class="hidden lg:flex lg:col-span-4 justify-end items-center relative">
+                    <span class="absolute top-1/4 right-0 text-[9vw] font-black text-blanco-puro/5 leading-none select-none whitespace-nowrap z-0">ADCs</span>
+                    <div class="text-right flex flex-col items-end relative z-10">
+                        <div class="p-8 border-r-4 border-oro-sanitario bg-granate-clinico/80 backdrop-blur-md max-w-xs reveal shadow-xl" style="transition-delay: 0.3s;">
+                            <p class="text-blanco-puro font-headline italic text-xl leading-relaxed">
+                                "Un ADC no es simple quimioterapia endovenosa; es bioingeniería de precisión que requiere comprender el perfilado exacto del anticuerpo y la toxicidad intracelular."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="bg-rosa-viejo py-12 border-b border-granate-clinico/10">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="flex flex-col items-center text-center space-y-3 reveal">
+                        <span class="material-symbols-outlined text-granate-clinico text-4xl">assignment_turned_in</span>
+                        <div class="text-3xl font-extrabold text-granate-clinico">Self-Assessment</div>
+                        <div class="text-[10px] uppercase font-black tracking-widest text-granate-clinico/70">Evaluación Clínica Continua</div>
+                    </div>
+                    <div class="flex flex-col items-center text-center space-y-3 reveal" style="transition-delay: 0.1s;">
+                        <span class="material-symbols-outlined text-granate-clinico text-4xl">workspace_premium</span>
+                        <div class="text-3xl font-extrabold text-granate-clinico">Créditos CFC</div>
+                        <div class="text-[10px] uppercase font-black tracking-widest text-granate-clinico/70">Acreditación Oficial (SNS)</div>
+                    </div>
+                    <div class="flex flex-col items-center text-center space-y-3 reveal" style="transition-delay: 0.2s;">
+                        <span class="material-symbols-outlined text-granate-clinico text-4xl">view_module</span>
+                        <div class="text-3xl font-extrabold text-granate-clinico">3 Módulos</div>
+                        <div class="text-[10px] uppercase font-black tracking-widest text-granate-clinico/70">Linfoides, Mieloides, Bienestar</div>
+                    </div>
+                    <div class="flex flex-col items-center text-center space-y-3 reveal" style="transition-delay: 0.3s;">
+                        <span class="material-symbols-outlined text-granate-clinico text-4xl">science</span>
+                        <div class="text-3xl font-extrabold text-granate-clinico">100% EHA</div>
+                        <div class="text-[10px] uppercase font-black tracking-widest text-granate-clinico/70">Basado en HemaSphere</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="proposito" class="min-h-screen flex flex-col justify-center py-32 bg-blanco-hueso text-granate-clinico">
+            <div class="max-w-4xl mx-auto px-6 space-y-12 text-center reveal">
+                <div class="w-16 h-1.5 bg-oro-sanitario mx-auto mb-8 rounded-full"></div>
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-ultra">
+                    El reto de la secuenciación <br> en escenarios de <span class="text-oro-sanitario">Refractariedad</span>.
+                </h2>
+                <h3 class="text-xl md:text-2xl text-granate-clinico/80 font-bold uppercase tracking-widest italic">
+                    Justificación Estratégica del Programa
+                </h3>
+                <div class="text-lg md:text-xl leading-loose font-body font-light text-balance text-left md:text-center mt-12 bg-white p-10 rounded-2xl border border-rosa-viejo shadow-lg italic">
+                    "La coexistencia competitiva de estas moléculas con las terapias celulares (CAR-T) y los anticuerpos biespecíficos exige al hematólogo actualizar críticamente sus protocolos. ¿Es preferible utilizar un ADC como puente antes o como rescate después de una terapia CAR-T?"
+                </div>
+                <p class="text-lg text-oro-sanitario font-black uppercase tracking-[0.3em] pt-8">Maximizando la Supervivencia Libre de Progresión.</p>
+            </div>
+        </section>
+
+        <section id="metodologia" class="min-h-screen flex flex-col justify-center py-32 bg-rosa-viejo text-granate-clinico">
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+                <div class="space-y-12 reveal">
+                    <div>
+                        <span class="text-granate-clinico font-black text-[11px] uppercase tracking-[0.6em] mb-4 block opacity-60">Eficacia Formativa</span>
+                        <h2 class="text-5xl font-black tracking-ultra">Metodología UX y Certificación CFC.</h2>
+                    </div>
+                    <p class="text-lg text-granate-clinico/90 font-medium leading-relaxed">Un entorno virtual de aprendizaje estructurado para garantizar la asimilación clínica profunda, basado exclusivamente en las publicaciones de *HemaSphere*.</p>
+                    
+                    <ul class="space-y-10">
+                        <li class="flex gap-6 group">
+                            <div class="bg-blanco-hueso p-4 h-fit rounded-lg shadow-sm border border-granate-clinico/10 text-granate-clinico group-hover:bg-granate-clinico group-hover:text-blanco-puro transition-all">
+                                <span class="material-symbols-outlined">school</span>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">Evaluación Formativa Continua</h4>
+                                <p class="text-sm text-granate-clinico/80 leading-relaxed italic">Cuestionarios interactivos (10 preguntas) al final de cada módulo con feedback fundamentado en la literatura de la EHA.</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-6 group">
+                            <div class="bg-blanco-hueso p-4 h-fit rounded-lg shadow-sm border border-granate-clinico/10 text-granate-clinico group-hover:bg-granate-clinico group-hover:text-blanco-puro transition-all">
+                                <span class="material-symbols-outlined">auto_stories</span>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">Estructura "State of the Art"</h4>
+                                <p class="text-sm text-granate-clinico/80 leading-relaxed italic">Arquitectura académica estricta: Executive Brief, Scientific Core, Critical Debate, Practice Inside y Clinical Cases.</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-6 group">
+                            <div class="bg-blanco-hueso p-4 h-fit rounded-lg shadow-sm border border-granate-clinico/10 text-granate-clinico group-hover:bg-granate-clinico group-hover:text-blanco-puro transition-all">
+                                <span class="material-symbols-outlined">bolt</span>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">Flexibilidad Asíncrona</h4>
+                                <p class="text-sm text-granate-clinico/80 leading-relaxed italic">Flujo de navegación estrictamente secuencial y adaptable al profesional médico con alta carga asistencial.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Respaldo Literario -->
+                <div class="flex flex-col items-center justify-center h-full mt-12 lg:mt-0 reveal" style="transition-delay: 0.2s;">
+                    <div class="flex flex-col items-center text-center w-full max-w-md">
+                        <img src="./logos/logo_eha.png" alt="EHA HemaSphere" class="h-40 md:h-52 w-auto object-contain mb-6 mix-blend-multiply" onerror="this.src='https://placehold.co/450x180/F9F6F6/7A1C24?text=EHA+/+HemaSphere'">
+                        <span class="text-[10px] font-black text-granate-clinico uppercase tracking-[0.2em]">Fuente Científica Exclusiva</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="objetivos" class="min-h-screen flex flex-col justify-center py-32 bg-blanco-hueso text-granate-clinico">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="mb-20 text-center reveal">
+                    <span class="text-oro-sanitario font-black text-[11px] uppercase tracking-[0.5em] mb-4 block">Competencias a Desarrollar</span>
+                    <h2 class="text-4xl md:text-5xl font-black tracking-ultra">Objetivos del Programa.</h2>
+                    <p class="text-lg text-granate-clinico/80 mt-4 max-w-2xl mx-auto italic">Capacitar al equipo multidisciplinar en el manejo seguro y humanizado de los Anticuerpos Conjugados.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Objetivo 1 -->
+                    <div class="bg-white p-10 rounded-2xl border border-rosa-viejo shadow-lg reveal hover:-translate-y-2 transition-transform duration-300">
+                        <div class="w-14 h-14 bg-rosa-viejo rounded-full flex items-center justify-center mb-8 border border-granate-clinico/10">
+                            <span class="material-symbols-outlined text-granate-clinico text-3xl">biotech</span>
+                        </div>
+                        <h4 class="text-2xl font-black mb-4">Competencias Terapéuticas</h4>
+                        <p class="text-granate-clinico/80 leading-relaxed text-sm font-medium">
+                            Diseccionar la farmacodinámica de las distintas familias de ADCs, prediciendo el impacto de la estabilidad del linker y la citotoxicidad en el microambiente tumoral.
+                        </p>
+                    </div>
+                    
+                    <!-- Objetivo 2 -->
+                    <div class="bg-white p-10 rounded-2xl border border-rosa-viejo shadow-lg reveal hover:-translate-y-2 transition-transform duration-300" style="transition-delay: 0.1s;">
+                        <div class="w-14 h-14 bg-rosa-viejo rounded-full flex items-center justify-center mb-8 border border-granate-clinico/10">
+                            <span class="material-symbols-outlined text-granate-clinico text-3xl">route</span>
+                        </div>
+                        <h4 class="text-2xl font-black mb-4">Algoritmos Clínicos</h4>
+                        <p class="text-granate-clinico/80 leading-relaxed text-sm font-medium">
+                            Configurar algoritmos de secuenciación para la integración de ADCs en recaída y refractariedad, analizando su papel frente a terapias celulares (CAR-T) y biespecíficos.
+                        </p>
+                    </div>
+                    
+                    <!-- Objetivo 3 -->
+                    <div class="bg-white p-10 rounded-2xl border border-rosa-viejo shadow-lg reveal hover:-translate-y-2 transition-transform duration-300" style="transition-delay: 0.2s;">
+                        <div class="w-14 h-14 bg-rosa-viejo rounded-full flex items-center justify-center mb-8 border border-granate-clinico/10">
+                            <span class="material-symbols-outlined text-granate-clinico text-3xl">diversity_1</span>
+                        </div>
+                        <h4 class="text-2xl font-black mb-4">Habilidades Humanísticas</h4>
+                        <p class="text-granate-clinico/80 leading-relaxed text-sm font-medium">
+                            Identificar y manejar tempranamente toxicidades (queratopatía, SOS), integrar PROs y aplicar estrategias de prevención del distrés moral y burnout en el equipo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="impacto" class="min-h-screen flex flex-col justify-center py-32 bg-rosa-viejo text-granate-clinico border-y border-granate-clinico/10">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="mb-20 text-center reveal">
+                    <span class="text-granate-clinico opacity-60 font-black text-[11px] uppercase tracking-[0.4em] mb-4 block">Ecosistema Clínico Integral</span>
+                    <h2 class="text-4xl md:text-5xl font-black mb-6 tracking-ultra">Capacitación Multidisciplinar.</h2>
+                    <p class="text-granate-clinico/80 text-lg uppercase font-bold tracking-[0.2em] italic">Dirigido al equipo de atención Onco-Hematológica.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="p-8 border border-blanco-puro rounded-xl bg-blanco-puro shadow-md space-y-6 reveal hover:border-oro-sanitario hover:-translate-y-1 transition-all">
+                        <span class="text-[10px] font-black text-oro-sanitario tracking-stately">PERFIL 01</span>
+                        <h4 class="text-xl font-black">Hematólogos Clínicos</h4>
+                        <p class="text-sm text-granate-clinico/80 leading-relaxed italic">Prescriptores clave. Obligatorio para la asimilación de algoritmos de secuenciación y comprensión del valor diferencial de cada mecanismo de acción.</p>
+                    </div>
+                    <div class="p-8 border border-blanco-puro rounded-xl bg-blanco-puro shadow-md space-y-6 reveal hover:border-oro-sanitario hover:-translate-y-1 transition-all" style="transition-delay: 0.1s;">
+                        <span class="text-[10px] font-black text-oro-sanitario tracking-stately">PERFIL 02</span>
+                        <h4 class="text-xl font-black">Farmacia Hospitalaria</h4>
+                        <p class="text-sm text-granate-clinico/80 leading-relaxed italic">Actores imprescindibles ante la altísima complejidad galénica (reconstitución, interacciones) e impacto farmacoeconómico en comités.</p>
+                    </div>
+                    <div class="p-8 border border-blanco-puro rounded-xl bg-blanco-puro shadow-md space-y-6 reveal hover:border-oro-sanitario hover:-translate-y-1 transition-all" style="transition-delay: 0.2s;">
+                        <span class="text-[10px] font-black text-oro-sanitario tracking-stately">PERFIL 03</span>
+                        <h4 class="text-xl font-black">Enfermería Onco-Hematológica</h4>
+                        <p class="text-sm text-granate-clinico/80 leading-relaxed italic">El motor ejecutor. De su pericia para implementar PROs y detectar toxicidades precoces depende el mantenimiento de la intensidad de la dosis.</p>
+                    </div>
+                    <div class="p-8 border border-blanco-puro rounded-xl bg-blanco-puro shadow-md space-y-6 reveal hover:border-oro-sanitario hover:-translate-y-1 transition-all" style="transition-delay: 0.3s;">
+                        <span class="text-[10px] font-black text-oro-sanitario tracking-stately">PERFIL 04</span>
+                        <h4 class="text-xl font-black">Médicos Residentes (MIR)</h4>
+                        <p class="text-sm text-granate-clinico/80 leading-relaxed italic">Esenciales para fijar bases biológicas sólidas y cultivar tempranamente habilidades humanísticas que sostendrán su viabilidad profesional.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="programa" class="min-h-screen flex flex-col justify-center py-32 bg-blanco-hueso text-granate-clinico border-b border-rosa-viejo">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="mb-20 text-center reveal">
+                    <span class="text-oro-sanitario font-black text-[11px] uppercase tracking-[0.5em] mb-4 block font-headline">Contenidos y Estructura</span>
+                    <h2 class="text-4xl md:text-6xl font-black tracking-ultra">El Currículum Científico.</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+                    <!-- Sidebar Informativo -->
+                    <div class="lg:col-span-4 sticky top-32 reveal">
+                        <p class="text-lg font-bold mb-6 uppercase tracking-[0.2em] italic">3 Módulos de Excelencia.</p>
+                        <p class="text-granate-clinico/80 leading-relaxed text-sm italic border-l-2 border-oro-sanitario pl-6 mb-8">Estructurado bajo los máximos estándares para CFC, abarcando rigurosamente los 8 apartados pedagógicos de la metodología State of the Art.</p>
+                        
+                        <div class="bg-white p-6 rounded-xl border border-rosa-viejo shadow-md space-y-4">
+                            <div class="flex items-center gap-4">
+                                <span class="bg-rosa-viejo p-2 rounded-lg text-granate-clinico material-symbols-outlined text-sm">menu_book</span>
+                                <span class="text-[10px] font-black uppercase tracking-widest">Scientific Core & Readings</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="bg-rosa-viejo p-2 rounded-lg text-granate-clinico material-symbols-outlined text-sm">forum</span>
+                                <span class="text-[10px] font-black uppercase tracking-widest">Critical Debate & Practice</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="bg-rosa-viejo p-2 rounded-lg text-granate-clinico material-symbols-outlined text-sm">quiz</span>
+                                <span class="text-[10px] font-black uppercase tracking-widest">Clinical Cases & Assessment</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="bg-rosa-viejo p-2 rounded-lg text-granate-clinico material-symbols-outlined text-sm">smart_display</span>
+                                <span class="text-[10px] font-black uppercase tracking-widest">Multimedia Complementary</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Acordeones con Temario -->
+                    <div class="lg:col-span-8 space-y-4 reveal">
+                        
+                        <!-- Módulo 1 -->
+                        <div class="accordion-item bg-white rounded-xl overflow-hidden border border-rosa-viejo transition-all shadow-sm hover:shadow-md">
+                            <button class="w-full px-8 py-8 flex justify-between items-center text-left focus:outline-none hover:bg-blanco-hueso transition-colors" onclick="toggleAccordion(this)">
+                                <div class="flex items-center gap-6">
+                                    <span class="text-[10px] font-black text-oro-sanitario tracking-stately">M1</span>
+                                    <h4 class="text-xl font-bold">Revolución de los ADCs en Linfomas y Discrasias de Células Plasmáticas</h4>
+                                </div>
+                                <span class="material-symbols-outlined text-oro-sanitario accordion-icon transition-transform">expand_more</span>
+                            </button>
+                            <div class="accordion-content bg-white">
+                                <div class="px-8 pb-8 pt-0 ml-12">
+                                    <p class="text-granate-clinico/80 leading-relaxed italic border-l-2 border-oro-sanitario/50 pl-6 h-fit py-1 mb-6">
+                                        Capacitar en la integración y secuenciación óptima de ADCs dirigidos a dianas linfoides y plasmáticas (CD30, CD79b, CD19, BCMA).
+                                    </p>
+                                    <div class="bg-blanco-hueso rounded-xl p-6 border border-rosa-viejo">
+                                        <ul class="space-y-4">
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">podcasts</span> <strong>Executive Brief:</strong> Consolidación de las dianas CD30, CD79b, CD19 y BCMA.</li>
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">article</span> <strong>Scientific Core:</strong> Brentuximab vedotin en pacientes mayores con linfoma de Hodgkin.</li>
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">forum</span> <strong>Critical Debate:</strong> Secuenciación post-CAR-T con polatuzumab vedotin en LBDCG.</li>
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">link</span> <strong>Further Readings:</strong> Seguridad de belantamab mafodotin (anti-BCMA) en recaída.</li>
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">lightbulb</span> <strong>Practice Inside:</strong> Algoritmo de manejo proactivo de la queratopatía ocular.</li>
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">clinical_notes</span> <strong>Clinical Cases:</strong> LBDCG refractario para dosimetría y prevención de neuropatía.</li>
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">quiz</span> <strong>Self-Assessment:</strong> Cuestionario interactivo basado en EHA (10 preguntas).</li>
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">play_circle</span> <strong>Multimedia:</strong> Video-animación 3D mecanismo de acción y bystander effect.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Módulo 2 -->
+                        <div class="accordion-item bg-white rounded-xl overflow-hidden border border-rosa-viejo transition-all shadow-sm hover:shadow-md">
+                            <button class="w-full px-8 py-8 flex justify-between items-center text-left focus:outline-none hover:bg-blanco-hueso transition-colors" onclick="toggleAccordion(this)">
+                                <div class="flex items-center gap-6">
+                                    <span class="text-[10px] font-black text-oro-sanitario tracking-stately">M2</span>
+                                    <h4 class="text-xl font-bold">ADCs en Patología Mieloide y Fronteras de la Innovación</h4>
+                                </div>
+                                <span class="material-symbols-outlined text-oro-sanitario accordion-icon transition-transform">expand_more</span>
+                            </button>
+                            <div class="accordion-content bg-white">
+                                <div class="px-8 pb-8 pt-0 ml-12">
+                                    <p class="text-granate-clinico/80 leading-relaxed italic border-l-2 border-oro-sanitario/50 pl-6 h-fit py-1 mb-6">
+                                        Profundizar en la farmacodinámica de dianas mieloides (CD33, CD123, CLL-1) y estrategias de rescate en pacientes no elegibles para quimioterapia intensiva.
+                                    </p>
+                                    <div class="bg-blanco-hueso rounded-xl p-6 border border-rosa-viejo">
+                                        <ul class="space-y-4">
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">podcasts</span> <strong>Executive Brief:</strong> Estrategias de rescate y dianas emergentes en LMA y BPDCN.</li>
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">article</span> <strong>Scientific Core:</strong> Impacto de gemtuzumab ozogamicina (anti-CD33) en reducción de EMR.</li>
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">forum</span> <strong>Critical Debate:</strong> Emergencia del anti-CD123 frente a regímenes clásicos (BPDCN).</li>
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">link</span> <strong>Further Readings:</strong> Estado del arte en terapias anti-CLL-1 en LMA recurrente.</li>
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">lightbulb</span> <strong>Practice Inside:</strong> Prevención farmacológica del Síndrome de Obstrucción Sinusoidal (SOS).</li>
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">clinical_notes</span> <strong>Clinical Cases:</strong> Rescate en paciente mieloide unfit con citopenias previas.</li>
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">quiz</span> <strong>Self-Assessment:</strong> Cuestionario interactivo clínico (10 preguntas).</li>
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">play_circle</span> <strong>Multimedia:</strong> Entrevista con KOL sobre estratificación en pacientes frágiles.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Módulo 3 -->
+                        <div class="accordion-item bg-white rounded-xl overflow-hidden border border-rosa-viejo transition-all shadow-sm hover:shadow-md">
+                            <button class="w-full px-8 py-8 flex justify-between items-center text-left focus:outline-none hover:bg-blanco-hueso transition-colors" onclick="toggleAccordion(this)">
+                                <div class="flex items-center gap-6">
+                                    <span class="text-[10px] font-black text-oro-sanitario tracking-stately">M3</span>
+                                    <h4 class="text-xl font-bold">Sello Humanista: Manejo de Toxicidades y Bienestar Profesional</h4>
+                                </div>
+                                <span class="material-symbols-outlined text-oro-sanitario accordion-icon transition-transform">expand_more</span>
+                            </button>
+                            <div class="accordion-content bg-white">
+                                <div class="px-8 pb-8 pt-0 ml-12">
+                                    <p class="text-granate-clinico/80 leading-relaxed italic border-l-2 border-oro-sanitario/50 pl-6 h-fit py-1 mb-6">
+                                        Dotar al equipo de protocolos para el manejo de toxicidades limitantes y estrategias de prevención del distrés moral y burnout.
+                                    </p>
+                                    <div class="bg-blanco-hueso rounded-xl p-6 border border-rosa-viejo">
+                                        <ul class="space-y-4">
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">podcasts</span> <strong>Executive Brief:</strong> Sostenibilidad y humanización frente a la toxicidad celular.</li>
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">article</span> <strong>Scientific Core:</strong> Rol crítico de los PROs en evaluación de calidad de vida bajo regímenes intensivos.</li>
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">forum</span> <strong>Critical Debate:</strong> Infradiagnóstico y riesgo de burnout en facultativos hematólogos.</li>
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">link</span> <strong>Further Readings:</strong> Comunidades de apoyo ("Grupos Balint") en jefaturas de hematología.</li>
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">lightbulb</span> <strong>Practice Inside:</strong> Protocolos de comunicación clínica (SPIKES) ante suspensión de terapias.</li>
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">clinical_notes</span> <strong>Clinical Cases:</strong> Intervención ambulatoria de neuropatía y fatiga por compasión.</li>
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">quiz</span> <strong>Self-Assessment:</strong> Escenarios ético-relacionales (10 preguntas).</li>
+                                            <li class="flex items-start gap-3 text-sm"><span class="material-symbols-outlined text-granate-clinico text-[18px]">play_circle</span> <strong>Multimedia:</strong> Videocast de la serie "El Sanador Herido": límites de la medicina de precisión.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="avales" class="min-h-screen flex flex-col justify-center py-32 bg-rosa-viejo text-granate-clinico">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="mb-24 text-center reveal">
+                    <span class="text-granate-clinico font-black text-[11px] uppercase tracking-[0.8em] mb-4 block opacity-70">Legitimidad Científica</span>
+                    <h2 class="text-4xl md:text-6xl font-black tracking-ultra">Dirección Académica Propuesta.</h2>
+                    <p class="text-lg text-granate-clinico/80 font-bold uppercase tracking-[0.2em] mt-6 italic">KOLs Nacionales e Internacionales en Hematología.</p>
+                </div>
+                
+                <!-- Directors -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                    <div class="bg-blanco-puro p-10 rounded-2xl border border-blanco-puro shadow-md reveal hover:-translate-y-1 transition-transform">
+                        <span class="text-[9px] font-black text-oro-sanitario tracking-widest uppercase mb-4 block">Dir. Global y Módulo 3</span>
+                        <h4 class="text-2xl font-black mb-3">Dr. Pere Gascón</h4>
+                        <p class="text-xs font-medium text-granate-clinico/80">Ex jefe Hematología y Oncología (NJ, USA) y Hospital Clínic BCN. Aporta la visión humanista y el rigor clínico internacional.</p>
+                    </div>
+                    <div class="bg-blanco-puro p-10 rounded-2xl border border-blanco-puro shadow-md reveal hover:-translate-y-1 transition-transform" style="transition-delay: 0.1s;">
+                        <span class="text-[9px] font-black text-oro-sanitario tracking-widest uppercase mb-4 block">Módulo 1 (Linfoides)</span>
+                        <h4 class="text-2xl font-black mb-3">Dr. Raúl Córdoba</h4>
+                        <p class="text-xs font-medium text-granate-clinico/80">Coordinador Unidad de Linfomas, Hosp. Fundación Jiménez Díaz (Madrid). Referente absoluto en linfomas y calidad de vida.</p>
+                    </div>
+                    <div class="bg-blanco-puro p-10 rounded-2xl border border-blanco-puro shadow-md reveal hover:-translate-y-1 transition-transform" style="transition-delay: 0.2s;">
+                        <span class="text-[9px] font-black text-oro-sanitario tracking-widest uppercase mb-4 block">Módulo 2 (Mieloides)</span>
+                        <h4 class="text-2xl font-black mb-3">Dr. Pau Montesinos</h4>
+                        <p class="text-xs font-medium text-granate-clinico/80">Hospital La Fe (Valencia). Líder internacional indiscutible en patología mieloide y ensayos clínicos de alta complejidad.</p>
+                    </div>
+                </div>
+                
+                <!-- Institutional Seals -->
+                <div class="mt-32 flex flex-col justify-center items-center gap-16 reveal">
+                    <div class="flex flex-col items-center gap-6 w-full">
+                        <span class="text-[11px] font-black uppercase tracking-[0.3em] text-granate-clinico/70">Se solicitará aval científico:</span>
+                        <div class="flex flex-col justify-center items-center gap-12 w-full max-w-4xl pt-4">
+                            <!-- Fila Superior: SEHH -->
+                            <div class="flex justify-center w-full">
+                                <img src="./logos/logo_sehh.png" alt="SEHH" class="h-44 md:h-48 lg:h-52 w-auto mix-blend-multiply transition-transform hover:scale-105 opacity-90" onerror="this.src='https://placehold.co/200x100/F9F6F6/7A1C24?text=Aval+SEHH'">
+                            </div>
+                            <!-- Fila Inferior: GELTAMO y PETHEMA -->
+                            <div class="flex flex-wrap justify-center items-center gap-16 md:gap-28 lg:gap-36 w-full">
+                                <img src="./logos/logo_geltamo.png" alt="GELTAMO" class="h-16 md:h-20 lg:h-24 w-auto mix-blend-multiply transition-transform hover:scale-105 opacity-90" onerror="this.src='https://placehold.co/200x100/F9F6F6/7A1C24?text=GELTAMO'">
+                                <img src="./logos/logo_pethema.png" alt="PETHEMA" class="h-16 md:h-20 lg:h-24 w-auto mix-blend-multiply transition-transform hover:scale-105 opacity-90" onerror="this.src='https://placehold.co/200x100/F9F6F6/7A1C24?text=PETHEMA'">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center gap-6 mt-10">
+                        <span class="text-[11px] font-black uppercase tracking-[0.3em] text-granate-clinico/70">PENDIENTE ACREDITACIÓN CFC SNS:</span>
+                        <img src="./logos/logo_cfc.png" alt="CFC SNS" class="h-24 md:h-32 w-auto mix-blend-multiply transition-transform hover:scale-105" onerror="this.src='https://placehold.co/400x180/E8D7D9/7A1C24?text=Créditos+CFC+SNS'">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-40 bg-granate-clinico reveal relative overflow-hidden border-t border-oro-sanitario/20 min-h-screen flex items-center text-blanco-puro">
+            <div class="max-w-7xl mx-auto px-6 relative z-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                
+                <!-- Bloque Izquierdo: Copy -->
+                <div class="flex flex-col items-start text-left">
+                    <h2 class="text-4xl md:text-6xl lg:text-7xl font-black leading-tight tracking-ultra italic mb-6">
+                        El Paciente <br class="hidden lg:block"><span class="text-oro-sanitario">en el Centro.</span>
+                    </h2>
+                    
+                    <h3 class="text-2xl md:text-3xl font-light text-blanco-puro/90 leading-snug text-balance italic mb-6">
+                        Innovación terapéutica al servicio del cuidado humano.
+                    </h3>
+                    
+                    <p class="max-w-xl text-lg text-blanco-puro/80 leading-relaxed font-medium mb-12">
+                        Nuestra propuesta formativa dota al especialista de las herramientas de precisión biológica más avanzadas sin olvidar nunca a la persona, ni el bienestar de los profesionales que la cuidan.
+                    </p>
+                    
+                    <div class="flex flex-col items-start gap-10">
+                        <div class="flex flex-wrap gap-x-6 gap-y-3 text-[10px] font-black uppercase tracking-stately text-blanco-puro/90 mt-2">
+                            <div class="flex items-center gap-2 whitespace-nowrap">
+                                <span class="w-1.5 h-1.5 rounded-full bg-oro-sanitario shrink-0"></span>
+                                Formación Médica Independiente
+                            </div>
+                            <div class="flex items-center gap-2 whitespace-nowrap">
+                                <span class="w-1.5 h-1.5 rounded-full bg-oro-sanitario shrink-0"></span>
+                                Unrestricted Educational Grant
+                            </div>
+                            <div class="flex items-center gap-2 whitespace-nowrap">
+                                <span class="w-1.5 h-1.5 rounded-full bg-oro-sanitario shrink-0"></span>
+                                Onco-Hematología Avanzada
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bloque Derecho: Alianza Visual -->
+                <div class="flex flex-col items-center justify-center h-full w-full mt-16 lg:mt-0 relative">
+                    <img src="./logos/logo_hygeia.png" alt="Hygeia Hub" class="w-full max-w-xs md:max-w-md lg:max-w-xl h-auto transition-transform duration-700 hover:scale-105" onerror="this.src='https://placehold.co/600x200/7A1C24/FFFFFF?text=Hygeia+Learning+Hub'">
+                </div>
+            </div>
+        </section> 
+    </main>
+	<footer class="py-12 bg-blanco-hueso text-granate-clinico border-t border-rosa-viejo">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="space-y-2 text-center md:text-left">
+                <div class="flex items-center justify-center md:justify-start mb-4">
+                    <!-- Logo modificado para que contraste con el fondo claro -->
+                    <img src="./logos/logo_hygeia.png" alt="Hygeia Hub" class="h-16 md:h-20 lg:h-24 w-auto mix-blend-multiply" onerror="this.src='https://placehold.co/200x60/F9F6F6/7A1C24?text=Hygeia+Hub'">
+                </div>
+                <!-- Textos cambiados a granate-clinico con opacidad -->
+                <p class="text-[9px] font-black uppercase tracking-[0.4em] text-granate-clinico/60 leading-loose">
+                    © 2026 Madrid — Barcelona <br>
+                    Hygeia Learning Hub.
+                </p>
+            </div>
+            
+            <div class="flex flex-col items-center text-center">
+                <!-- Textos cambiados a granate-clinico -->
+                <p class="text-[8px] font-bold uppercase tracking-[0.2em] text-granate-clinico/80">
+                    Contacto Corporativo: <br>
+                    <a href="mailto:dfernandez@hygeia.network" class="text-oro-sanitario hover:text-granate-clinico mt-1 block underline lowercase">dfernandez@hygeia.network</a>
+                </p>
+            </div>
+
+            <div class="flex gap-10 text-[10px] font-black uppercase tracking-stately text-granate-clinico/80">
+                <a href="#" onclick="openModal('modal-aviso'); return false;" class="hover:text-oro-sanitario transition-colors cursor-pointer">Aviso Legal</a>
+                <a href="#" onclick="openModal('modal-privacidad'); return false;" class="hover:text-oro-sanitario transition-colors cursor-pointer">Privacidad</a>
+            </div>
+        </div>
+    </footer>
+ 
+    <!-- Modales -->
+    <div id="modal-aviso" class="modal fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-granate-clinico/80 backdrop-blur-sm cursor-pointer" onclick="closeModal('modal-aviso')"></div>
+        <div class="bg-blanco-hueso relative z-10 w-full max-w-3xl max-h-[85vh] rounded-2xl shadow-2xl flex flex-col mx-4 overflow-hidden border border-rosa-viejo text-granate-clinico">
+            <div class="flex justify-between items-center p-6 border-b border-rosa-viejo bg-rosa-viejo">
+                <h2 class="text-xl font-bold font-headline">Aviso Legal</h2>
+                <button onclick="closeModal('modal-aviso')" class="text-granate-clinico/60 hover:text-oro-sanitario transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="p-8 overflow-y-auto font-body text-sm text-granate-clinico/90 space-y-6">
+                <div class="prose prose-sm max-w-none text-granate-clinico">
+                    <p class="font-bold">Información General</p>
+                    <p>En cumplimiento de lo dispuesto en la Ley 34/2002, de 11 de julio, de servicios de la sociedad de la información y de comercio electrónico (LSSI-CE), se informa de que el presente sitio web tiene carácter corporativo, institucional y estrictamente informativo para profesionales sanitarios.</p>
+                    
+                    <p class="font-bold mt-6">Titular del Sitio</p>
+                    <p>HYGEIA LEARNING HUB, SL<br>NIF/CIF: B26580704<br>Domicilio social: C\ Capitan Arenas 22 1-3 08034 Barcelona<br>Correo electrónico de contacto: info@hygeia.network</p>
+
+                    <p>El acceso, la navegación y el uso del sitio web atribuyen la condición de usuario e implican la aceptación plena del presente Aviso legal.</p>
+
+                    <p class="font-bold mt-6">Uso de los contenidos e Independencia Editorial</p>
+                    <p>Este programa se financia de forma independiente mediante un Unrestricted Educational Grant. La entidad patrocinadora no tiene injerencia sobre el contenido científico ni en la selección de los ponentes. HLH no se hace responsable de posibles decisiones clínicas tomadas a raíz del contenido de la web; todo contenido es exclusivamente educativo y apoyado en publicaciones de HemaSphere.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-privacidad" class="modal fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-granate-clinico/80 backdrop-blur-sm cursor-pointer" onclick="closeModal('modal-privacidad')"></div>
+        <div class="bg-blanco-hueso relative z-10 w-full max-w-3xl max-h-[85vh] rounded-2xl shadow-2xl flex flex-col mx-4 overflow-hidden border border-rosa-viejo text-granate-clinico">
+            <div class="flex justify-between items-center p-6 border-b border-rosa-viejo bg-rosa-viejo">
+                <h2 class="text-xl font-bold font-headline">Política de Privacidad Institucional</h2>
+                <button onclick="closeModal('modal-privacidad')" class="text-granate-clinico/60 hover:text-oro-sanitario transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="p-8 overflow-y-auto font-body text-sm text-granate-clinico/90 space-y-6">
+                <div class="prose prose-sm max-w-none text-granate-clinico">
+                    <p class="font-bold">Información General</p>
+                    <p>HLH vela por la protección de la privacidad y por el tratamiento responsable de los datos personales, de conformidad con el Reglamento (UE) 2016/679 (RGPD) y normativa vigente.</p>
+
+                    <p class="font-bold mt-6">Tratamiento y Conservación</p>
+                    <p>Los datos recogidos (ej. vía email) son los estrictamente necesarios para atender consultas sobre nuestros programas CME. No se utilizarán con fines comerciales de terceros y se conservarán el tiempo estrictamente necesario.</p>
+
+                    <p class="font-bold mt-6">Derechos del Usuario</p>
+                    <p>Puede ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad mediante escrito a info@hygeia.network.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Manejo de Modales
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if(modal) {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = 'hidden'; 
+            }
+        }
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if(modal) {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Smooth Reveal Observer
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+        // Acordeones
+        function toggleAccordion(button) {
+            const item = button.parentElement;
+            const content = item.querySelector('.accordion-content');
+            const isActive = item.classList.contains('active');
+
+            document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                otherItem.classList.remove('active');
+                otherItem.querySelector('.accordion-content').style.maxHeight = null;
+            });
+
+            if (!isActive) {
+                item.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        }
+    </script>
+
+    <!-- Asistente IA Institucional Integrado -->
+    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+    <style>
+      /* Personalización del Chat Widget a la identidad Editorial Hygeia */
+      :root {
+        --chat--color--primary: #D4AF37; /* Oro Sanitario */
+        --chat--color--primary-shade-50: #C29E2E; 
+        --chat--color--primary--shade-100: #B08D25; 
+        --chat--color--secondary: #7A1C24; /* Granate Clínico */
+        --chat--color-secondary-shade-50: #62161D; 
+        
+        --chat--color-white: #F9F6F6; /* Blanco Hueso */
+        --chat--color-light: #E8D7D9; /* Rosa Viejo para zona escritura */
+        --chat--color-dark: #7A1C24; /* Texto oscuro para el bot */
+        
+        --chat--toggle--background: #D4AF37; 
+        --chat--toggle--color: #7A1C24; 
+
+        --chat--header--color: #F9F6F6; 
+      }
+      
+      .chat-window {
+        box-shadow: 0 10px 25px rgba(122, 28, 36, 0.25) !important;
+        font-family: 'Inter', sans-serif;
+      }
+
+      .chat-window header,
+      .chat-window [class*="header"] {
+          color: var(--chat--color-white) !important;
+      }
+      .chat-window header *,
+      .chat-window [class*="header"] * {
+          color: var(--chat--color-white) !important;
+      }
+
+      .chat-window .chat-message,
+      .chat-window .chat-message-text,
+      .chat-window .chat-message p,
+      .chat-window .n8n-chat-message,
+      .chat-window [class*="message"] {
+          font-size: 0.85rem !important;
+          line-height: 1.5 !important;
+      }
+    </style>
+
+    <script type="module">
+      import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+      createChat({
+        webhookUrl: 'https://n8n.asklepiosdat.com/webhook/21df4372-e2aa-4eb2-8072-77e62538fc71/chat',
+        initialMessages: [
+            '¡Hola! Soy el Asesor Académico de Hygeia Learning Hub.',
+            '¿En qué puedo ayudarte sobre el programa formativo State of the Art in ADCs in Hematology?'
+        ],
+        i18n: {
+            en: {
+                title: 'Hygeia Learning Hub', 
+                subtitle: 'Asesoría Académica - Hematología',
+                getStarted: 'Nueva conversación', 
+                chatInput: { 
+                    placeholder: 'Consulta sobre el programa de ADCs...' 
+                }
+            }
+        }
+      });
+    </script>
+</body>
+</html>
